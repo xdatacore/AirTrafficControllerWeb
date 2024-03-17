@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <h2>@ViewData["Title"]</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="mb-3">
+                <label for="Username" class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" id="Username" name="Username" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="Password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="Password" name="Password" required>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe">
+                <label class="form-check-label" for="RememberMe">Recuérdame</label>
+            </div>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <p>@error.ErrorMessage</p>
+                    }
+                </div>
+            }
+
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+    </div>
+</div>
